@@ -2,7 +2,7 @@
 import Card from "./card";
 
 function CardList({ cards, onPlay }) {
-  function handleCardClick(index){
+  function handleCardClick(index) {
     const cardStatus = cards[index].status;
     if (cardStatus !== "closed") {
       return;
@@ -22,11 +22,18 @@ function CardList({ cards, onPlay }) {
       onPlay(updatedCards);
     }
   }
-  
+
   return (
     <div className="grid gap-x-3 grid-cols-3 grid-rows-4 min-w-[430px] max-w-[480px] border border-orange-300">
       {cards.map((card, index) => {
-        return <Card key={index} status={card.status} imageUrl={card.imageUrl} onClick={()=> handleCardClick(index)}/>
+        return (
+          <Card
+            key={index}
+            status={card.status}
+            imageUrl={card.imageUrl}
+            onClick={()=> handleCardClick(index)}
+          />
+        );
       })}
     </div>
   );
