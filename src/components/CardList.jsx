@@ -24,9 +24,9 @@ function CardList({ cards, onPlay }) {
   }
   
   return (
-    <div className="grid gap-4 grid-cols-3 grid-rows-4">
+    <div className="grid gap-x-3 grid-cols-3 grid-rows-4 min-w-[430px] max-w-[480px] border border-orange-300">
       {cards.map((card, index) => {
-        return <Card key={index} status={card.status} imageUrl={card.imageUrl} onClick={()=>{handleCardClick(index)}}/>
+        return <Card key={index} status={card.status} imageUrl={card.imageUrl} onClick={()=> handleCardClick(index)}/>
       })}
     </div>
   );

@@ -6,6 +6,7 @@ import image3Url from "./assets/infinite-challenge-3.jpg";
 import image4Url from "./assets/infinite-challenge-4.jpg";
 import image5Url from "./assets/infinite-challenge-5.jpg";
 import image6Url from "./assets/infinite-challenge-6.jpg";
+import TextButton from "./components/TextButton";
 
 const IMAGES = [image1Url, image2Url, image3Url, image4Url, image5Url, image6Url];
 
@@ -67,10 +68,10 @@ function App() {
   }
 
   return (
-    <div>
-      {cards.every((card) => card.status === "fixed") && <div className="text-2xl text-teal-400">게임 끝</div>}
+    <div className="flex flex-col gap-y-3 items-center">
+      {cards.every((card) => card.status === "fixed") && <div className="text-2xl text-teal-400">GAME END 🏆</div>}
+      <TextButton onClick={() => setCards(reset())}>RESET</TextButton>
       <CardList cards={cards} onPlay={handlePlay} />
-      <button onClick={() => setCards(reset())}>리셋</button>
     </div>
   );
 }
