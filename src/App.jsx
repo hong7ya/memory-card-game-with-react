@@ -62,7 +62,10 @@ function App() {
   }
 
   return (
-    <CardList cards={cards} onPlay={handlePlay} />
+    <div>
+      {cards.every((card) => card.status === "fixed") && <div className="text-2xl text-teal-400">게임 끝</div>}
+      <CardList cards={cards} onPlay={handlePlay} />
+    </div>
   );
 }
 
