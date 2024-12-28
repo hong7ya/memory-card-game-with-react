@@ -8,7 +8,6 @@ import image5Url from "./assets/infinite-challenge-5.jpg";
 import image6Url from "./assets/infinite-challenge-6.jpg";
 
 const IMAGES = [image1Url, image2Url, image3Url, image4Url, image5Url, image6Url];
-const CardImages = randomize([...IMAGES, ...IMAGES]);
 
 function randomize(array){
   const randomized = [];
@@ -22,23 +21,29 @@ function randomize(array){
   return randomized;
 }
 
-function App() {
-  const [cards, setCards] = useState(
-    Array.from(Array(CardImages.length), (_, index) => {
-      return {
-        status: "closed",
-        imageUrl: CardImages[index]
-      }
-    })
-  );
+function reset(){
+  const CardImages = randomize([...IMAGES, ...IMAGES]);
 
-  function waitForCardOpening(selectedCards) {
-    return new Promise((resolve) => {
-      setTimeout(()=>{
-        resolve(selectedCards);
-      }, 1000);
-    });
-  }
+  const cards = Array.from(Array(CardImages.length), (_, index) => {
+    return {
+      status: "closed",
+      imageUrl: CardImages[index]
+    }
+  });
+
+  return cards;
+}
+
+function waitForCardOpening(selectedCards) {
+  return new Promise((resolve) => {
+    setTimeout(()=>{
+      resolve(selectedCards);
+    }, 1000);
+  });
+}
+
+function App() {
+  const [cards, setCards] = useState(() => reset());
 
   function handlePlay(updatedCards) {
     const selectedCards = updatedCards.filter((card) => card.status === "selected");
@@ -65,6 +70,7 @@ function App() {
     <div>
       {cards.every((card) => card.status === "fixed") && <div className="text-2xl text-teal-400">게임 끝</div>}
       <CardList cards={cards} onPlay={handlePlay} />
+      <button onClick={() => setCards(reset())}>리셋</button>
     </div>
   );
 }
